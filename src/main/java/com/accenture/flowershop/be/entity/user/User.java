@@ -1,5 +1,7 @@
 package com.accenture.flowershop.be.entity.user;
 
+import java.math.BigDecimal;
+
 public class User {
 
     private String username;
@@ -7,10 +9,10 @@ public class User {
     private String fullname;
     private String address;
     private String phone;
-    private double balance;
+    private BigDecimal balance;
     private int discount;
 
-    public User(String username, String password, String fullname, String address, String phone, double balance, int discount) {
+    public User(String username, String password, String fullname, String address, String phone, BigDecimal balance, int discount) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -60,11 +62,11 @@ public class User {
         this.phone = phone;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 

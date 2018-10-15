@@ -1,11 +1,13 @@
 package com.accenture.flowershop.be.entity.flower;
 
+import java.math.BigDecimal;
+
 public class Flower {
     private String name;
     private int amount;
-    private double price;
+    private BigDecimal price;
 
-    public Flower(String name, int amount, double price) {
+    public Flower(String name, int amount, BigDecimal price) {
         this.name = name;
         this.amount = amount;
         this.price = price;
@@ -27,11 +29,11 @@ public class Flower {
         this.amount = amount;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

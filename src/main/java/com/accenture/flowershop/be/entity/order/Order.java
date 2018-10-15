@@ -2,19 +2,20 @@ package com.accenture.flowershop.be.entity.order;
 
 import com.accenture.flowershop.fe.enums.order.Status;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 public class Order {
     private int id;
     private int orderNum;
-    private double orderSubtotal;
+    private BigDecimal orderSubtotal;
     private List<Item> items;
     private Date orderDate;
     private Date orderCloseDate;
     private Status orderStatus;
 
-    public Order(int id, int orderNum, double orderSum, List<Item> items, Date orderDate, Date orderCloseDate, Status orderStatus) {
+    public Order(int id, int orderNum, BigDecimal orderSum, List<Item> items, Date orderDate, Date orderCloseDate, Status orderStatus) {
         this.id = id;
         this.orderNum = orderNum;
         this.orderSubtotal = orderSum;
@@ -64,11 +65,11 @@ public class Order {
         this.orderNum = orderNum;
     }
 
-    public double getOrderSum() {
+    public BigDecimal getOrderSum() {
         return orderSubtotal;
     }
 
-    public void setOrderSum(double orderSum) {
+    public void setOrderSum(BigDecimal orderSum) {
         this.orderSubtotal = orderSum;
     }
 

@@ -1,21 +1,23 @@
 package com.accenture.flowershop.be.business.order;
 
-import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.order.Item;
+
+import java.math.BigDecimal;
 
 public class OrderBusinessServiceImpl implements OrderBusinessService {
 
     @Override
-    public void addItem(Flower flower) {
+    public void addItem(Item item) {
 
     }
 
     @Override
-    public void removeItem(Flower flower) {
+    public void removeItem(Item item) {
 
     }
 
     @Override
-    public double calculateSubtotalAndDiscount() {
-        return 0;
+    public BigDecimal calculateSubtotalAndDiscount() {
+        return null;
     }
 }

@@ -1,12 +1,14 @@
 package com.accenture.flowershop.be.business.order;
 
-import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.order.Item;
+
+import java.math.BigDecimal;
 
 public interface OrderBusinessService {
 
-    void addItem(Flower flower);
+    void addItem(Item item);
 
-    void removeItem(Flower flower);
+    void removeItem(Item item);
 
-    double calculateSubtotalAndDiscount();
+    BigDecimal calculateSubtotalAndDiscount();
 }

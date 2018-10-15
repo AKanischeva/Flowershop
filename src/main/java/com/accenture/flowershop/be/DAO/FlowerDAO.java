@@ -2,6 +2,7 @@ package com.accenture.flowershop.be.DAO;
 
 import com.accenture.flowershop.be.entity.flower.Flower;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface FlowerDAO {
@@ -12,5 +13,5 @@ public interface FlowerDAO {
 
     boolean removeFlower(Flower flower);
 
-    List getFlowersByPrice(double minPrice, double maxPrice);
+    List getFlowersByPrice(BigDecimal minPrice, BigDecimal maxPrice);
 }
