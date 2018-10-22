@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface FlowerDAO {
 
-    Flower getFlower(String name);
+    List<Flower> getFlowers();
 
-    boolean addFlower(Flower flower);
+    List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
 
-    boolean removeFlower(Flower flower);
+    List<Flower> getByName(String name);
 
-    List getFlowersByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+    void updateQuantity(Long id, int quantity);
 }

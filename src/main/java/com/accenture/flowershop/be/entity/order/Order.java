@@ -1,83 +1,54 @@
 package com.accenture.flowershop.be.entity.order;
 
-import com.accenture.flowershop.fe.enums.order.Status;
+import com.accenture.flowershop.be.entity.user.User;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
+@Entity
 public class Order {
-    private int id;
-    private int orderNum;
-    private BigDecimal orderSubtotal;
-    private List<Item> items;
-    private Date orderDate;
-    private Date orderCloseDate;
-    private Status orderStatus;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cust")
+    @SequenceGenerator(name = "seq_cust", sequenceName = "seq_cust", allocationSize = 1)
+    @Getter
+    @Setter
+    private Long id;
+    @Getter
+    @Setter
+    private Date createDate;
+    @Getter
+    @Setter
+    private Date completeDate;
 
-    public Order(int id, int orderNum, BigDecimal orderSum, List<Item> items, Date orderDate, Date orderCloseDate, Status orderStatus) {
-        this.id = id;
-        this.orderNum = orderNum;
-        this.orderSubtotal = orderSum;
-        this.items = items;
-        this.orderDate = orderDate;
-        this.orderCloseDate = orderCloseDate;
-        this.orderStatus = orderStatus;
+    @ManyToOne
+    @JoinColumn(name = "ID")
+    @Getter
+    @Setter
+    private User user;    //private Long userId
+    @Getter
+    @Setter
+    private BigDecimal subTotal;
+
+    public Order() {
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", completeDate=" + completeDate +
+                ", user=" + user +
+                ", subTotal=" + subTotal +
+                '}';
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Date getOrderCloseDate() {
-        return orderCloseDate;
-    }
-
-    public void setOrderCloseDate(Date orderCloseDate) {
-        this.orderCloseDate = orderCloseDate;
-    }
-
-    public Status getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(Status orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public BigDecimal getOrderSum() {
-        return orderSubtotal;
-    }
-
-    public void setOrderSum(BigDecimal orderSum) {
-        this.orderSubtotal = orderSum;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
+    private enum status {
+        NEW,
+        PAID,
+        CLOSED
     }
 }

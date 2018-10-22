@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class OrderDTO {
-    private int id;
-    private int orderNum;
+    private Long userId;
+    private Long orderNum;
     private BigDecimal orderSubtotal;
     private List<Item> items;
     private Date orderDate;

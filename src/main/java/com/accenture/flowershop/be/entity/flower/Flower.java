@@ -1,39 +1,37 @@
 package com.accenture.flowershop.be.entity.flower;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class Flower {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cust")
+    @SequenceGenerator(name = "seq_cust", sequenceName = "seq_cust", allocationSize = 1)
+    @Getter
+    @Setter
+    private Long id;
+    @Getter
+    @Setter
     private String name;
-    private int amount;
+    @Getter
+    @Setter
     private BigDecimal price;
+    @Getter
+    @Setter
+    private int quantity;
 
-    public Flower(String name, int amount, BigDecimal price) {
-        this.name = name;
-        this.amount = amount;
-        this.price = price;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return "Flower{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }

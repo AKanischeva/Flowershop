@@ -1,80 +1,56 @@
 package com.accenture.flowershop.be.entity.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Entity
 public class User {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cust")
+    @SequenceGenerator(name = "seq_cust", sequenceName = "seq_cust", allocationSize = 1)
+    @Getter
+    @Setter
+    private Long id;
+    @Getter
+    @Setter
     private String username;
+    @Getter
+    @Setter
     private String password;
-    private String fullname;
-    private String address;
+    @Getter
+    @Setter
+    private String fullName;
+    @Getter
+    @Setter
     private String phone;
+    @Getter
+    @Setter
+    private String address;
+    @Getter
+    @Setter
     private BigDecimal balance;
+    @Getter
+    @Setter
     private int discount;
+    @Getter
+    @Setter
+    private boolean isAdmin;
 
-    public User(String username, String password, String fullname, String address, String phone, BigDecimal balance, int discount) {
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-        this.address = address;
-        this.phone = phone;
-        this.balance = balance;
-        this.discount = discount;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phone=" + phone +
+                ", address='" + address + '\'' +
+                ", balance=" + balance +
+                ", discount=" + discount +
+                ", isAdmin=" + isAdmin +
+                '}';
     }
 }
