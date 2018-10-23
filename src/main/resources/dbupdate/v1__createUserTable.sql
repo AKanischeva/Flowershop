@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS  USER (
   fullname VARCHAR(255),
   phone     VARCHAR(50),
   address  TEXT,
-  balance  DOUBLE DEFAULT 2000    NOT NULL,
-  discount INT DEFAULT 3,
+  balance  DECIMAL(10,2),
+  discount INT,
   isadmin  BOOLEAN DEFAULT FALSE NOT NULL
 );
 

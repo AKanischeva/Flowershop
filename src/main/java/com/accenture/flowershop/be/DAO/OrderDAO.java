@@ -4,7 +4,7 @@ import com.accenture.flowershop.be.entity.order.Order;
 
 public interface OrderDAO {
 
-    Order getOrderByID(int id);
+    Order getOrderByID(Integer id);
 
     Order getOrderByNum(String num);
 

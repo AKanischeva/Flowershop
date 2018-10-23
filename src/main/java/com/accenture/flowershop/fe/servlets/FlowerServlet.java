@@ -30,5 +30,6 @@ public class FlowerServlet extends HttpServlet {
         resp.setContentType("text/html");
 
         resp.getWriter().print("<html><body><h2>" + result + "</h2></body></html>");
+        resp.getWriter().println("<tr><td><a href=\"index.jsp" + "\">Login</a></td></tr>");
     }
 }

@@ -11,7 +11,7 @@ public interface FlowerDAO {
 
     List<Flower> getByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
 
-    List<Flower> getByName(String name);
+    Flower getByName(String name);
 
-    void updateQuantity(Long id, int quantity);
+    void updateQuantity(Long id, Integer quantity);
 }

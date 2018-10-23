@@ -9,8 +9,7 @@ import javax.persistence.*;
 @Entity
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cust")
-    @SequenceGenerator(name = "seq_cust", sequenceName = "seq_cust", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Long id;
@@ -19,17 +18,17 @@ public class Item {
     @JoinColumn(name = "ORDERID")
     @Getter
     @Setter
-    private Order order;    //private Long orderId;
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "FLOWERID")
     @Getter
     @Setter
-    private Flower flower;  //private Long flowerId;
+    private Flower flower;
 
     @Getter
     @Setter
-    private int amount;
+    private Integer amount;
 
     public Item() {
     }

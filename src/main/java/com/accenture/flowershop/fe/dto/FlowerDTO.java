@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 public class FlowerDTO {
     private Long id;
     private String name;
-    private int amount;
+    private Integer amount;
     private BigDecimal price;
 }

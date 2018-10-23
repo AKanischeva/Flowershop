@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface FlowerBusinessService {
 
-    boolean checkAvailability(String name, int amount);
+    boolean checkAvailability(String name, Integer amount);
 
     Flower getFlower(String name);
 
     List<Flower> getFlowerByPriceRange(BigDecimal minPrice, BigDecimal maxPrice);
 
-    void updateFlowersQuantity(Long id, int quantity);
+    void updateFlowersQuantity(Long id, Integer quantity);
 
 }

@@ -9,5 +9,5 @@ public class UserDTO {
     private String address;
     private String phone;
     private BigDecimal balance;
-    private int discount;
+    private Integer discount;
 }

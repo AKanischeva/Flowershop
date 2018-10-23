@@ -1,16 +1,19 @@
 package com.accenture.flowershop.be.DAO;
 
 import com.accenture.flowershop.be.entity.user.User;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface UserDAO {
 
-    User getUserByID(String id);
+    User get(String username);
 
-    User getUserByName(String name);
+    User getByUsername(String username);
 
-    User getUserByPhone(String phone);
+    @Transactional
+    User getByUsernameAndPassword(String username, String password);
 
-    boolean addUser(User user);
+    @Transactional
+    User create(User user);
 
-    boolean removeUser(User user);
+    void update(User user);
 }

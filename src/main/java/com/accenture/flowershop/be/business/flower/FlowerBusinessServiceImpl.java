@@ -8,7 +8,7 @@ import java.util.List;
 public class FlowerBusinessServiceImpl implements FlowerBusinessService {
 
     @Override
-    public boolean checkAvailability(String name, int amount) {
+    public boolean checkAvailability(String name, Integer amount) {
         return false;
     }
 
@@ -23,7 +23,7 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     }
 
     @Override
-    public void updateFlowersQuantity(Long id, int quantity) {
+    public void updateFlowersQuantity(Long id, Integer quantity) {
 
     }
 }

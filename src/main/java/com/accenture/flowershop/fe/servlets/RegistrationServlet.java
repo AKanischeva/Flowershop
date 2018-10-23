@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/registration")
+public class RegistrationServlet extends HttpServlet {
     @Autowired
     UserBusinessService userBusinessService;
 
@@ -29,26 +29,15 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
+        String cpassword = request.getParameter("inputCPassword");
+        String fullName = request.getParameter("inputFullName");
+        String phone = request.getParameter("inputPhone");
+        String address = request.getParameter("inputAddress");
 
-        //TODO fix this shit
-        try {
-            if (!username.isEmpty() && !password.isEmpty()) {
-                if (userBusinessService.login(username, password) != null) {
-                    response.sendRedirect("successRegistration.html");
-                } else {
-                    response.sendRedirect("registrationFailed.html");
-                }
-            } else {
-                response.sendRedirect("registrationFailed.html");
-            }
-
-        } catch (NullPointerException e) {
+        if (!password.equals(cpassword) || userBusinessService.register(username, password, fullName, phone, address) == null) {
             response.sendRedirect("registrationFailed.html");
+        } else {
+            response.sendRedirect("successRegistration.html");
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 }
