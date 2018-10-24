@@ -13,20 +13,18 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 
     @Override
     public User login(String username, String password) {
-        if (dao.getByUsernameAndPassword(username, password) != null) {
-            return dao.getByUsername(username);
-        }
-        return null;
+        return dao.getByUsernameAndPassword(username, password);
     }
 
     @Override
     public User register(@NotEmpty String username, @NotEmpty String password, String fullName, String phone, String address) {
         try {
-            User u = new User(username, password, fullName, phone, address);
             if (dao.getByUsername(username) == null) {
+                User u = new User(username, password, fullName, phone, address);
                 dao.create(u);
                 return u;
             }
+            //TODO normal catch
         } catch (Exception ex) {
             System.out.println("ERROR");
             ex.printStackTrace();
@@ -37,5 +35,10 @@ public class UserBusinessServiceImpl implements UserBusinessService {
     @Override
     public User updateUser(User user) {
         return null;
+    }
+
+    @Override
+    public User getInfo(String username) {
+        return dao.getByUsername(username);
     }
 }

@@ -1,7 +1,7 @@
 package com.accenture.flowershop.fe.servlets;
 
-import com.accenture.flowershop.be.business.flower.FlowerBusinessService;
-import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
-@WebServlet(urlPatterns = "/flower")
-public class FlowerServlet extends HttpServlet {
-
+@WebServlet(urlPatterns = "/profile")
+public class ProfileServlet extends HttpServlet {
     @Autowired
-    FlowerBusinessService fbs;
+    UserBusinessService ubs;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,14 +28,20 @@ public class FlowerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
 
-        List<Flower> flowers = fbs.flowersList();
-        HttpSession session = req.getSession(false);
-        session.setAttribute("f", flowers);
 
-        session.setAttribute("test", flowers.get(0).toString());
-
-        req.getRequestDispatcher("/flower.jsp").forward(req, resp);
+        try {
+            HttpSession session = req.getSession(false);
+            String username = session.getAttribute("un").toString();
+            User u = ubs.getInfo(username);
+            req.setAttribute("un", u.getFullName());
+            req.setAttribute("bal", u.getBalance());
+            req.setAttribute("disc", u.getDiscount());
+            req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+        } catch (NullPointerException e) {
+            return;
+        }
     }
 }
-

@@ -37,8 +37,7 @@ public class UserDAOImpl implements UserDAO {
                     "u.password=:password", User.class);
             query.setParameter("username", username);
             query.setParameter("password", password);
-            User user = query.getSingleResult();
-            return user;
+            return query.getSingleResult();
         } catch (NoResultException ex) {
             return null;
         }

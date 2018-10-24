@@ -3,13 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/flowershop.css">
+    <link rel="stylesheet" type="text/css" href="css/flowershop.css">
     <title>Welcome</title>
 </head>
 
 <body>
-
-<a href="servlet">Click here to see servlet</a>
 
 <form class="form-container" name="Form" method="post" onsubmit=" return validateForm()" action="login">
     <div class="form-title"><h2>Sign up</h2></div>

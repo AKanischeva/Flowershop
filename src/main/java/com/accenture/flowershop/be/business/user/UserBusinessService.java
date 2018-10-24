@@ -9,4 +9,6 @@ public interface UserBusinessService {
     User register(String username, String password, String fullName, String phone, String address);
 
     User updateUser(User user);
+
+    User getInfo(String username);
 }

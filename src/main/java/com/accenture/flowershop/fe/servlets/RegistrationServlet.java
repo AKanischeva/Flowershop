@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = "/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -27,6 +28,7 @@ public class RegistrationServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        PrintWriter out = response.getWriter();
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
         String cpassword = request.getParameter("inputCPassword");
@@ -34,10 +36,24 @@ public class RegistrationServlet extends HttpServlet {
         String phone = request.getParameter("inputPhone");
         String address = request.getParameter("inputAddress");
 
-        if (!password.equals(cpassword) || userBusinessService.register(username, password, fullName, phone, address) == null) {
-            response.sendRedirect("registrationFailed.html");
+        if (!password.equals(cpassword)) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Passwords don't match');");
+            out.println("location='registration';");
+            out.println("</script>");
+        } else if (userBusinessService.register(username, password, fullName, phone, address) == null) {
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Username already exists');");
+            out.println("location='registration';");
+            out.println("</script>");
         } else {
             response.sendRedirect("successRegistration.html");
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("registration.jsp").forward(req, resp);
+
     }
 }

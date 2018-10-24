@@ -1,11 +1,18 @@
 package com.accenture.flowershop.be.business.flower;
 
+import com.accenture.flowershop.be.DAO.FlowerDAO;
 import com.accenture.flowershop.be.entity.flower.Flower;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Component
 public class FlowerBusinessServiceImpl implements FlowerBusinessService {
+
+    @Autowired
+    FlowerDAO dao;
 
     @Override
     public boolean checkAvailability(String name, Integer amount) {
@@ -25,5 +32,10 @@ public class FlowerBusinessServiceImpl implements FlowerBusinessService {
     @Override
     public void updateFlowersQuantity(Long id, Integer quantity) {
 
+    }
+
+    @Override
+    public List<Flower> flowersList() {
+        return dao.getFlowers();
     }
 }
