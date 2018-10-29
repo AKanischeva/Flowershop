@@ -1,15 +1,23 @@
 package com.accenture.flowershop.be.DAO;
 
 import com.accenture.flowershop.be.entity.order.Order;
+import com.accenture.flowershop.be.entity.user.User;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public interface OrderDAO {
 
-    Order getOrderByID(Integer id);
+    @Transactional
+    List<Order> getOrders();
 
-    Order getOrderByNum(String num);
+    @Transactional
+    Order create(Order order);
 
-    boolean addOrder(Order order);
+    void update(Order order);
 
-    boolean removeOrder(Order order);
+    void delete(Long id);
+
+    List<Order> getOrderByUser(User user);
 
 }

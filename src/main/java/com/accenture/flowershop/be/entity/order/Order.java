@@ -8,8 +8,13 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+@Table(name = "\"ORDER\"")
 @Entity
 public class Order {
+    @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
+    status status;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -21,9 +26,8 @@ public class Order {
     @Getter
     @Setter
     private Date completeDate;
-
-    @ManyToOne
-    @JoinColumn(name = "ID")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "userId")
     @Getter
     @Setter
     private User user;    //private Long userId
@@ -34,6 +38,14 @@ public class Order {
     public Order() {
     }
 
+    public Order(User user, BigDecimal subTotal) {
+        this.user = user;
+        this.subTotal = subTotal;
+        this.createDate = new Date();
+        this.completeDate = null;
+        this.status = status.NEW;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -42,6 +54,7 @@ public class Order {
                 ", completeDate=" + completeDate +
                 ", user=" + user +
                 ", subTotal=" + subTotal +
+                ", status=" + status +
                 '}';
     }
 

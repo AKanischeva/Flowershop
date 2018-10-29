@@ -2,6 +2,7 @@ package com.accenture.flowershop.fe.servlets;
 
 import com.accenture.flowershop.be.business.flower.FlowerBusinessService;
 import com.accenture.flowershop.be.entity.flower.Flower;
+import com.accenture.flowershop.be.entity.order.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -13,13 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/flower")
 public class FlowerServlet extends HttpServlet {
 
     @Autowired
-    FlowerBusinessService fbs;
+    FlowerBusinessService flowerBusinessService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -28,14 +30,37 @@ public class FlowerServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
 
-        List<Flower> flowers = fbs.flowersList();
+
+        List<Item> cart = new ArrayList<>();
+        List<Flower> flowers = flowerBusinessService.flowersList();
+        Integer quantity;
+
+        for (Flower flower : flowers) {
+
+            String amountStr = req.getParameter("amount" + flower.getId());
+            try {
+
+
+                if ((quantity = Integer.parseInt(amountStr)) > 0) {
+                    Item item = new Item(flower, quantity);
+                    cart.add(item);
+                }
+            } catch (NumberFormatException e) {
+                continue;
+            }
+        }
+        session.setAttribute("cart", cart);
+        req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<Flower> flowers = flowerBusinessService.flowersList();
         HttpSession session = req.getSession(false);
         session.setAttribute("f", flowers);
-
-        session.setAttribute("test", flowers.get(0).toString());
-
         req.getRequestDispatcher("/flower.jsp").forward(req, resp);
     }
 }

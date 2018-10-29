@@ -132,6 +132,46 @@ body {
     color: #fff;
 }
 
-.center {
+.center, #logout, #balance {
     text-align: -webkit-center;
+}
+
+#flower {
+    width: 500px;
+}
+
+#ordersList {
+    width: 600px
+}
+
+form#order {
+    text-align: center;
+    width: 500px;
+}
+
+#cart, #info {
+    text-align: center;
+    width: 400px;
+    border: 4px double #c11818;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h2 {
+    font-weight: bolder;
+}
+
+label {
+    font-weight: bolder;
+    font-size: initial;
+}
+
+#totaldiv, #totalhr {
+    text-align: right;
+}
+
+table, th, td {
+    border: 1px solid #c11818;
+    padding: 10px;
+    text-align: center;
 }

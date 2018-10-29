@@ -1,6 +1,7 @@
 package com.accenture.flowershop.fe.servlets;
 
 import com.accenture.flowershop.be.business.user.UserBusinessService;
+import com.accenture.flowershop.be.entity.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -32,33 +33,23 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("inputUsername");
         String password = request.getParameter("inputPassword");
-
-//        try {
-//            userBusinessService.login(username, password).equals(null);
-//            HttpSession session = request.getSession();
-//            session.setAttribute("un", username);
-//            if (!userBusinessService.getInfo(username).isAdmin()) {
-//                response.sendRedirect("profile");
-//            } else {
-//
-//                response.sendRedirect("admin.jsp");
-//            }
-//
-//        } catch (NullPointerException e) {
-//            out.println("<script type=\"text/javascript\">");
-//            out.println("alert('Incorrect username or password');");
-//            out.println("location='index.jsp';");
-//            out.println("</script>");
-//        }
-        if (userBusinessService.login(username, password) == null) {
+        User user = userBusinessService.login(username, password);
+        if (user == null) {
             out.println("<script type=\"text/javascript\">");
             out.println("alert('Incorrect username or password');");
             out.println("location='index.jsp';");
             out.println("</script>");
         } else {
             HttpSession session = request.getSession();
-            session.setAttribute("un", username);
-            if (!userBusinessService.getInfo(username).isAdmin()) {
+            session.setAttribute("user", user);
+            session.setAttribute("username", username);
+            session.setAttribute("balance", user.getBalance());
+            session.setAttribute("discount", user.getDiscount());
+            session.setAttribute("total", 0);
+            session.setAttribute("fullname", user.getFullName());
+            session.setAttribute("phone", user.getPhone());
+            session.setAttribute("address", user.getAddress());
+            if (!user.isAdmin()) {
                 response.sendRedirect("profile");
             } else {
 
