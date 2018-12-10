@@ -12,7 +12,7 @@ public interface ItemDAO {
 
     List<Item> getItems();
 
-    List <Item> getByFilters(String theme, String director, String year, String student, String faculty);
+    List<Item> getByFilters(String theme, String director, String year, String student, String faculty);
 
     Item getById(Long id);
 }

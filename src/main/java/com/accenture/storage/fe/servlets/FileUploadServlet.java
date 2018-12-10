@@ -26,6 +26,8 @@ import java.sql.SQLException;
         maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class FileUploadServlet extends HttpServlet {
 
+    @Autowired
+    ItemBusinessService ibs;
     // database connection settings
     private String dbURL = "jdbc:h2:tcp://localhost/~/test";
     private String dbUser = "sa";
@@ -37,9 +39,6 @@ public class FileUploadServlet extends HttpServlet {
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
-    @Autowired
-    ItemBusinessService ibs;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,6 +48,7 @@ public class FileUploadServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         // gets values of text fields
@@ -79,7 +79,7 @@ public class FileUploadServlet extends HttpServlet {
         String message = null;  // message will be sent back to client
 
         try {
-            Class.forName ("org.h2.Driver");
+            Class.forName("org.h2.Driver");
             // connects to the database
             conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
 
@@ -111,11 +111,10 @@ public class FileUploadServlet extends HttpServlet {
         } catch (SQLException ex) {
             message = "ERROR: " + ex.getMessage();
             ex.printStackTrace();
-        }
-        catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             message = "ERROR: " + ex.getMessage();
             ex.printStackTrace();
-        }finally {
+        } finally {
             if (conn != null) {
                 // closes the database connection
                 try {

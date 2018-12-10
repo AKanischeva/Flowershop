@@ -13,8 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.sql.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.Connection;
 
 @WebServlet(urlPatterns = "/download")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -22,20 +24,19 @@ import java.sql.*;
         maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class FileDownloadServlet extends HttpServlet {
 
+    private static final int BUFFER_SIZE = 4096;
+    @Autowired
+    ItemBusinessService ibs;
+    // database connection settings
+    private String dbURL = "jdbc:h2:tcp://localhost/~/test";
+    private String dbUser = "sa";
+    private String dbPass = "";
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
-
-    @Autowired
-    ItemBusinessService ibs;
-    private static final int BUFFER_SIZE = 4096;
-
-    // database connection settings
-    private String dbURL = "jdbc:h2:tcp://localhost/~/test";
-    private String dbUser = "sa";
-    private String dbPass = "";
 
     @Override
     protected void doGet(HttpServletRequest request,

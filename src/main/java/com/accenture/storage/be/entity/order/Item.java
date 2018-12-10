@@ -2,7 +2,10 @@ package com.accenture.storage.be.entity.order;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Data
@@ -16,13 +19,13 @@ public class Item {
     private String year1;
     private String faculty;
     private String description;
-    private byte[ ] upload;
+    private byte[] upload;
     private String filename;
 
     public Item() {
     }
 
-    public Item(String student, String theme, String director, String year1, String faculty, String description, byte[ ] upload, String filename) {
+    public Item(String student, String theme, String director, String year1, String faculty, String description, byte[] upload, String filename) {
         this.student = student;
         this.theme = theme;
         this.director = director;

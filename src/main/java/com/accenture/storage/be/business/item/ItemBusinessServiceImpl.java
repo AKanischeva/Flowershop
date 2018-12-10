@@ -19,7 +19,7 @@ public class ItemBusinessServiceImpl implements ItemBusinessService {
     }
 
     @Override
-    public Item upload(String student, String theme, String director, String year, String faculty, String description, byte[ ] upload, String filename) {
+    public Item upload(String student, String theme, String director, String year, String faculty, String description, byte[] upload, String filename) {
         try {
             Item i = new Item(student, theme, director, year, faculty, description, upload, filename);
             dao.create(i);
