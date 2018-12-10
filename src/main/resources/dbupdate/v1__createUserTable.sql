@@ -3,10 +3,7 @@ CREATE TABLE IF NOT EXISTS  USER (
   username VARCHAR(50)           NOT NULL,
   password VARCHAR(50)           NOT NULL,
   fullname VARCHAR(255),
-  phone     VARCHAR(50),
-  address  TEXT,
-  balance  DECIMAL(10,2),
-  discount INT,
+  favs varchar (255),
   isadmin  BOOLEAN DEFAULT FALSE NOT NULL
 );
 

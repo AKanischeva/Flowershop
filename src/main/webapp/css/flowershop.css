@@ -19,7 +19,12 @@ body {
 /*width: 400px;*/
 /*text-align: center;*/
 /*}*/
-
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
 .form-container {
     border: 1px solid #f2e3d2;
     background: #c9b7a2;

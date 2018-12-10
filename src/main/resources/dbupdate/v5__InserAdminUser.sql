@@ -1,1 +1,0 @@
-INSERT INTO USER (username, password, fullname, isadmin) VALUES ('admin', 'admin123', 'Admin', true)
