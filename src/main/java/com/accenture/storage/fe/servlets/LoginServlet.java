@@ -62,8 +62,6 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("fav", 0);
                 session.setAttribute("fav", 0);
             }
-            session.setAttribute("test", flowers.get(0).toString());
-            request.setAttribute("test", flowers.get(0).toString());
             if (!userBusinessService.getInfo(username).isAdmin()) {
                 response.sendRedirect("profile");
             } else {

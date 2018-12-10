@@ -36,4 +36,9 @@ public class ItemBusinessServiceImpl implements ItemBusinessService {
     public Item getById(Long id) {
         return dao.getById(id);
     }
+
+    @Override
+    public void remove(Item item) {
+        dao.remove(item);
+    }
 }

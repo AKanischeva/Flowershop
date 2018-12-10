@@ -180,6 +180,9 @@
                         <td>${iter.year1}</td>
                         <td>${iter.faculty}</td>
                         <td>${iter.description}</td>
+                        <td>
+                            <a class="submit-button" href="/removeItem?id=${iter.id}">Remove</a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

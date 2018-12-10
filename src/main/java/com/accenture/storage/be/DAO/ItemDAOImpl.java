@@ -56,4 +56,12 @@ public class ItemDAOImpl implements ItemDAO {
             return null;
         }
     }
+
+    @Override
+    public void remove(Item item) {
+        Item emp = em.find(Item.class, item.getId());
+        if (emp != null) {
+            em.remove(emp);
+        }
+    }
 }

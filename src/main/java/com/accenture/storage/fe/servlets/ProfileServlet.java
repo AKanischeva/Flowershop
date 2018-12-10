@@ -58,8 +58,6 @@ public class ProfileServlet extends HttpServlet {
             session.setAttribute("f", flowers);
             req.setAttribute("f", flowers);
 
-            session.setAttribute("test", flowers.get(0).toString());
-            req.setAttribute("test", flowers.get(0).toString());
             req.getRequestDispatcher("/profile.jsp").forward(req, resp);
 
 
