@@ -4,6 +4,7 @@ import com.accenture.storage.be.business.item.ItemBusinessService;
 import com.accenture.storage.be.business.user.UserBusinessService;
 import com.accenture.storage.be.entity.order.Item;
 import com.accenture.storage.be.entity.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -15,13 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/admin")
-public class AdminServlet extends HttpServlet {
+@WebServlet("/seefav")
+public class SeeFavsServlet extends HttpServlet {
+
     @Autowired
     UserBusinessService ubs;
+
     @Autowired
     ItemBusinessService ibs;
 
@@ -33,30 +36,22 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-        req.setCharacterEncoding("utf-8");
-        resp.setCharacterEncoding("utf-8");
-
-
-        try {
-            HttpSession session = req.getSession(false);
-            String username = session.getAttribute("un").toString();
-            User u = ubs.getInfo(username);
-            req.setAttribute("un", u.getFullName());
-
-            List<Item> items = ibs.itemList();
-            session.setAttribute("f", items);
-            req.setAttribute("f", items);
-
-            req.getRequestDispatcher("/admin.jsp").forward(req, resp);
-        } catch (NullPointerException e) {
-            return;
+        HttpSession session = req.getSession(false);
+        String username = session.getAttribute("un").toString();
+        User u = ubs.getInfo(username);
+        req.setAttribute("un", u.getFullName());
+        req.setAttribute("fav", 0);
+        String favs = u.getFavs();
+        List<Item> favList = new ArrayList<>();
+        if (!StringUtils.isEmpty(favs)) {
+            String[] parts = favs.split(",");
+            for (String str : parts) {
+                favList.add(ibs.getById(Long.parseLong(str)));
+            }
+            req.setAttribute("favList", favList);
+            session.setAttribute("favList", favList);
+            req.setAttribute("fav", parts.length);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        getServletContext().getRequestDispatcher("/favs.jsp").forward(req, resp);
     }
 }

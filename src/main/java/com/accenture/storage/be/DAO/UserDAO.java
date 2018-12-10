@@ -15,5 +15,6 @@ public interface UserDAO {
     @Transactional
     User create(User user);
 
-    void update(User user);
+    @Transactional
+    public User update(User user);
 }

@@ -6,9 +6,8 @@
   Time: 11:48
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.math.BigDecimal" %>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<button type="button" name="back" class="submit-button" onclick="history.back()">back</button>--%>
+
 <html>
 <head>
     <title>Admin</title>
@@ -23,8 +22,6 @@
 <div class="row">
     <div class="col-sm-2" style="border-right: 1px solid red;">
         <div class="center">
-            <%--<a class="submit-button" href="item">Flowers</a>--%>
-
             <br>
             <h2><label>Hello, <%=(String) request.getAttribute("un")%>
             </label></h2><br>
@@ -161,19 +158,19 @@
         </form>
     </div>
     <div class="col-sm-6" style="border-right: 1px solid red;">
-        <%--<div class="center">--%>
-        <%--&lt;%&ndash;<a class="submit-button" href="item">Flowers</a>&ndash;%&gt;--%>
-
-        <%--<br>--%>
-        <%--<h2><label>Hello, <%=(String) request.getAttribute("un")%>--%>
-        <%--</label></h2><br>--%>
-
-        <%--<form action="logout" method="post">--%>
-        <%--<input type="submit" value="Logout" class="submit-button"/>--%>
-        <%--</form>--%>
-        <%--</div>--%>
         <div>
             <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Theme</th>
+                    <th>Director</th>
+                    <th>Year</th>
+                    <th>Faculty</th>
+                    <th>Desc</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 <c:forEach items="${f}" var="iter" varStatus="rowStatus">
                     <tr>
                         <td>${iter.id}</td>

@@ -6,7 +6,6 @@
   Time: 11:48
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="java.math.BigDecimal" %>
 <%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <html>
 <head>
@@ -21,12 +20,14 @@
 <div class="row">
     <div class="col-sm-2" style="border-right: 1px solid red;">
         <div class="center">
-            <%--<a class="submit-button" href="item">Flowers</a>--%>
 
             <br>
             <h2><label>Hello, <%=(String) request.getAttribute("un")%>
             </label></h2><br>
-
+            <h2><label>In fav: <%=(Integer) request.getAttribute("fav")%>
+            </label></h2><br>
+            <a class="submit-button" href="seefav">See favs</a>
+            <br><br>
             <form action="logout" method="post">
                 <input type="submit" value="Logout" class="submit-button"/>
             </form>
@@ -146,6 +147,17 @@
     <div class="col-sm-6" style="border-right: 1px solid red;">
         <div>
             <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Theme</th>
+                    <th>Director</th>
+                    <th>Year</th>
+                    <th>Faculty</th>
+                    <th>Desc</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 <c:forEach items="${f}" var="iter" varStatus="rowStatus">
                     <tr>
                         <td>${iter.id}</td>
@@ -157,6 +169,9 @@
                         <td>${iter.description}</td>
                         <td>
                             <a class="submit-button" href="/download?id=${iter.id}">Download</a>
+                        </td>
+                        <td>
+                            <a class="submit-button" href="/favs?id=${iter.id}">Add to fav</a>
                         </td>
                     </tr>
                 </c:forEach>

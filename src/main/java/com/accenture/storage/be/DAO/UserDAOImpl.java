@@ -54,7 +54,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
-
+    public User update(User user) {
+        try {
+            em.merge(user);
+            return user;
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 }

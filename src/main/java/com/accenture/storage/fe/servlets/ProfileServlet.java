@@ -4,6 +4,7 @@ import com.accenture.storage.be.business.item.ItemBusinessService;
 import com.accenture.storage.be.business.user.UserBusinessService;
 import com.accenture.storage.be.entity.order.Item;
 import com.accenture.storage.be.entity.user.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -44,6 +45,15 @@ public class ProfileServlet extends HttpServlet {
             String username = session.getAttribute("un").toString();
             User u = ubs.getInfo(username);
             req.setAttribute("un", u.getFullName());
+            String favs = u.getFavs();
+            if (!StringUtils.isEmpty(favs)) {
+                String[] parts = favs.split(",");
+                req.setAttribute("fav", parts.length);
+                session.setAttribute("fav", parts.length);
+            } else {
+                req.setAttribute("fav", 0);
+                session.setAttribute("fav", 0);
+            }
             List<Item> flowers = ibs.itemList();
             session.setAttribute("f", flowers);
             req.setAttribute("f", flowers);
@@ -56,5 +66,10 @@ public class ProfileServlet extends HttpServlet {
         } catch (NullPointerException e) {
             return;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
     }
 }

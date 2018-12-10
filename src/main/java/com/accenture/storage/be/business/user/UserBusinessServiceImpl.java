@@ -34,7 +34,7 @@ public class UserBusinessServiceImpl implements UserBusinessService {
 
     @Override
     public User updateUser(User user) {
-        return null;
+        return dao.update(user);
     }
 
     @Override
