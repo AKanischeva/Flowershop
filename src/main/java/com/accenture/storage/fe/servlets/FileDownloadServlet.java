@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Connection;
 
 @WebServlet(urlPatterns = "/download")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -45,8 +44,6 @@ public class FileDownloadServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         Long uploadId = Long.parseLong(request.getParameter("id"));
 
-
-        Connection conn = null; // connection to the database
 
         try {
             Item i = ibs.getById(uploadId);

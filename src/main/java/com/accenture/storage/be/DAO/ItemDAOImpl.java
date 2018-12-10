@@ -15,6 +15,9 @@ public class ItemDAOImpl implements ItemDAO {
     @PersistenceContext
     private EntityManager em;
 
+    public ItemDAOImpl() {
+    }
+
     @Override
     public List<Item> getItems() {
         List<Item> flowers = new ArrayList<>();
