@@ -6,7 +6,7 @@
   Time: 11:48
   To change this template use File | Settings | File Templates.
 --%>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Profile</title>
@@ -139,7 +139,8 @@
 
                     </div>
                 </div>
-                <input type="submit" value="Search" class="submit-button"/>
+                <a class="submit-button" href="/search?search=1">Search</a>
+                <a class="submit-button" href="/search?search=0">Clear</a>
             </div>
         </form>
     </div>
